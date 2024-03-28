@@ -10,6 +10,25 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        Umlautmain: Umlautmain {
+            compatible = "zmk,behavior-hold-tap";
+            label = "UMLAUTMAIN";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+
+        Shiftdance: Shiftdance {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SHIFTDANCE";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT>, <&kp CAPS>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -21,29 +40,14 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E     &kp R  &kp T        &kp Y         &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&kp LCTRL  &kp A  &kp S  &kp D     &kp F  &kp G        &kp H         &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp N         &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                         &kp LGUI  &mo 1  &kp ENTER    &kp DE_SPACE  &mo 2  &kp RALT
+&kp TAB      &Umlautmain DE_AT Q        &kp W                &kp E     &kp R  &kp T        &kp DE_Z   &Umlautmain DE_U_UMLAUT U  &kp I         &Umlautmain DE_O_UMLAUT O  &kp P         &kp BSPC
+&kp LCTRL    &Umlautmain DE_A_UMLAUT A  &Umlautmain DE_SZ S  &kp D     &kp F  &kp G        &kp H      &kp J                      &kp K         &kp L                      &kp DE_HASH   &kp ESCAPE
+&Shiftdance  &kp DE_Y                   &kp X                &kp C     &kp V  &kp B        &kp N      &kp M                      &kp DE_COMMA  &kp DE_PERIOD              &kp DE_MINUS  &kp RIGHT_SHIFT
+                                                             &kp LGUI  &mo 2  &kp ENTER    &kp SPACE  &mo 1                      &mo 3
             >;
         };
 
-        lower_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-            //                    | GUI |     | SPC |   | ENT |     | ALT |
-
-            bindings = <
-&kp TAB     &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6    &kp N7    &kp N8    &kp N9     &kp N0  &kp BSPC
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans  &trans
-&kp LSHFT   &trans        &trans        &trans        &trans        &trans          &trans    &trans    &trans    &trans     &trans  &trans
-                                        &kp LGUI      &trans        &kp SPACE       &kp RET   &trans    &kp RALT
-            >;
-        };
-
-        raise_layer {
+        Layer_1_Funktionen {
             // -----------------------------------------------------------------------------------------
             // |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
             // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
@@ -51,20 +55,53 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp TAB    &kp EXCL  &kp AT  &kp HASH         &kp DLLR         &kp PRCNT          &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC
-&kp LCTRL  &trans    &trans  &trans           &trans           &trans             &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT  &kp BSLH  &kp GRAVE
-&kp LSHFT  &trans    &trans  &kp DE_O_UMLAUT  &kp DE_U_UMLAUT  &kp DE_A_UMLAUT    &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp LGUI         &trans           &kp SPACE          &kp RET    &trans     &kp RALT
+&kp DE_EXCLAMATION  &kp DE_DOUBLE_QUOTES  &kp DE_SECTION  &kp DE_DOLLAR  &kp DE_PERCENT  &kp DE_AMPERSAND    &kp DE_SLASH  &kp DE_LEFT_PARENTHESIS  &kp DE_RIGHT_PARENTHESIS  &kp DE_EQUAL  &kp DE_QUESTION   &kp DE_ASTERISK
+&kp LCTRL           &kp DE_SUPER2         &kp DE_SUPER3   &kp DE_GRAVE   &trans          &trans              &none         &kp DE_LEFT_BRACKET      &kp DE_RIGHT_BRACKET      &kp DE_SQT    &kp DE_BACKSLASH  &kp DE_PLUS
+&kp DE_LESS_THAN    &kp DE_GREATER_THAN   &kp DE_PIPE     &none          &none           &none               &none         &kp DE_LEFT_BRACE        &kp DE_RIGHT_BRACE        &kp DE_HASH   &kp DE_MINUS      &kp TILDE
+                                                          &kp LGUI       &trans          &kp ENTER           &kp SPACE     &trans                   &kp RALT
+            >;
+        };
+
+        layer_2_Num {
+            // -----------------------------------------------------------------------------------------
+            // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
+            // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
+            //                    | GUI |     | SPC |   | ENT |     | ALT |
+
+            bindings = <
+&kp F1     &kp F2  &kp F3  &kp F4    &kp F5   &kp F6       &kp DE_N7  &kp DE_N8  &kp DE_N9  &kp DE_MINUS  &kp DE_SLASH     &kp BSPC
+&kp F7     &kp F8  &kp F9  &kp F10   &kp F11  &kp F12      &kp DE_N4  &kp DE_N5  &kp DE_N6  &kp PLUS      &kp DE_ASTERISK  &kp DE_EQUAL
+&kp LSHFT  &trans  &trans  &trans    &trans   &trans       &kp DE_N1  &kp DE_N2  &kp DE_N3  &kp DE_N0     &kp DE_COMMA     &kp DE_PERIOD
+                           &kp LGUI  &trans   &kp ENTER    &kp SPACE  &trans     &kp RALT
             >;
         };
 
         layer_3 {
             bindings = <
-&kp DE_A_UMLAUT  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans           &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans           &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                                 &trans  &trans  &trans    &trans  &trans  &trans
+&kp BSPC  &none  &none  &none  &none  &none        &none      &kp BSPC        &kp UP_ARROW  &kp DELETE  &none  &none
+&none     &none  &none  &none  &none  &none        &none      &kp LEFT_ARROW  &kp DOWN      &kp RIGHT   &none  &none
+&none     &none  &none  &none  &none  &none        &none      &none           &none         &none       &none  &none
+                        &none  &none  &kp ENTER    &kp SPACE  &none           &none
             >;
+        };
+
+        Bluetooth {
+            bindings = <
+&trans        &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans
+&trans        &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR    &trans  &trans  &trans  &trans  &trans  &trans
+                                          &trans        &trans        &trans        &trans  &trans  &trans
+            >;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        Bluetooth {
+            if-layers = <3 1>;
+            then-layer = <4>;
         };
     };
 };
