@@ -47,7 +47,7 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB      &Umlautmain DE_AT Q        &kp W                &kp E     &kp R  &kp T        &kp DE_Z   &Umlautmain DE_U_UMLAUT U  &kp I         &Umlautmain DE_O_UMLAUT O  &kp P         &kp BSPC
+&kp ESCAPE   &Umlautmain DE_AT Q        &kp W                &kp E     &kp R  &kp T        &kp DE_Z   &Umlautmain DE_U_UMLAUT U  &kp I         &Umlautmain DE_O_UMLAUT O  &kp P         &kp BSPC
 &kp LCTRL    &Umlautmain DE_A_UMLAUT A  &Umlautmain DE_SZ S  &kp D     &kp F  &kp G        &kp H      &kp J                      &kp K         &kp L                      &kp DE_HASH   &kp ESCAPE
 &Shiftdance  &kp DE_Y                   &kp X                &kp C     &kp V  &kp B        &kp N      &kp M                      &kp DE_COMMA  &kp DE_PERIOD              &kp DE_MINUS  &kp RIGHT_SHIFT
                                                              &kp LGUI  &mo 1  &kp SPACE    &kp SPACE  &numpaddance               &mo 3
